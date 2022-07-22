@@ -14,7 +14,7 @@ function MovieForm() {
     discount: false,
     female_director: false,
   });
-  //Using fetch
+
   // function handleSubmit(e) {
   //   e.preventDefault();
   //   fetch("/movies", {
@@ -33,7 +33,7 @@ function MovieForm() {
   // }
 
   // make the function async to enable the await keyword
-  //Refactored with asyinc
+  
   async function handleSubmit(e) {
     e.preventDefault();
     // fetch returns a Promise, we must await it

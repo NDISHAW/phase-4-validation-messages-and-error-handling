@@ -14,43 +14,22 @@ function MovieForm() {
     discount: false,
     female_director: false,
   });
-  //Using fetch
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   fetch("/movies", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(formData),
-  //   }).then((response) => {
-  //     if (response.ok) {
-  //       response.json().then((newMovie) => console.log(newMovie));
-  //     } else {
-  //       response.json().then((errorData) => setErrors(errorData.errors));
-  //     }
-  //   });
-  // }
 
-  // make the function async to enable the await keyword
-  //Refactored with asyinc
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    // fetch returns a Promise, we must await it
-    const response = await fetch("/movies", {
+    fetch("/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    });
-    // response.json() returns a Promise, we must await it
-    const data = await response.json();
-    if (response.ok) {
-      console.log("Movie created:", data);
-    } else {
-      setErrors(data.errors);
-    }
+    }).then((response) => {
+  if (response.ok) {
+    response.json().then((newMovie) => console.log(newMovie));
+  } else {
+    response.json().then((errorData) => setErrors(errorData.errors));
+  }
+})
   }
 
   function handleChange(e) {
@@ -151,13 +130,6 @@ function MovieForm() {
             />
           </label>
         </FormGroup>
-        {errors.length > 0 && (
-          <ul style={{ color: "red" }}>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        )}
         <SubmitButton type="submit">Add Movie</SubmitButton>
       </form>
     </Wrapper>
